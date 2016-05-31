@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @question.name %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @question.author %>
+</p>
+
+<p>
+  <strong>Download:</strong>
+  <a target="_blank" href=<%= @question.avatar.url %>> <%= @question.name %></a>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
