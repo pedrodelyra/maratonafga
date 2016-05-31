@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_is_admin, :only => [:new, :index, :show, :edit, :create, :destroy]
 
   # GET /questions
   # GET /questions.json
@@ -65,6 +66,10 @@ class QuestionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = Question.find(params[:id])
+    end
+
+    def verify_is_admin
+      (current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

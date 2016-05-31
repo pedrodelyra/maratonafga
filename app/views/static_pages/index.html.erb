@@ -29,26 +29,39 @@
 		</div>
 		<div>
 			<h2>Próximos Contests</h2>
-			<table>
-        <thead>
-          <tr>
-              <th data-field="id">Nome</th>
-              <th data-field="name">Início</th>
-              <th data-field="price">Duração</th>
-          </tr>
-        </thead>
-        <tbody>
-	        <% @next_contests.each do |contest| %>
-						<tr>
-							<td><%= contest.name %></td>
-							<td><%= contest.start %></td>
-							<td><%= contest.end - contest.start %></td>
-							<td>INSCREVER</td>
-						</tr>
-					<% end %>
-        </tbody>
-      </table>
-				
+			<% if @next_contests.empty? %>
+        <h5>
+        	Nenhum Contest cadastrado para os próximos dias.
+        </h5>
+      <% else %>
+				<table class="striped">
+	        <thead>
+	          <tr>
+	              <th data-field="name">Nome</th>
+	              <th data-field="start">Início</th>
+	              <th data-field="duration">Duração</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+		        <% @next_contests.each do |contest| %>
+							<tr>
+								<td><%= contest.name %></td>
+								<td><%= contest.start %></td>
+								<td><%= contest.end - contest.start %></td>
+								<td>
+								<% if user_signed_in? and not contest.user_emails.include? current_user.email%>
+									<%= button_to 'INSCREVER', static_pages_register_user_path(contest_id: contest.id), method: :post, :class=>"btn"%>
+								<% elsif user_signed_in? %>
+									PARTICIPANDO
+								<% else %>
+									INSCREVER
+								<% end %>
+								</td>
+							</tr>
+						<% end %>
+	        </tbody>
+	      </table>
+      <% end %>
 		</div>
   </body>
 </html>
