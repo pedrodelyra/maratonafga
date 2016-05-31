@@ -27,5 +27,28 @@
 		    </li>
 	    </ul>
 		</div>
+		<div>
+			<h2>Próximos Contests</h2>
+			<table>
+        <thead>
+          <tr>
+              <th data-field="id">Nome</th>
+              <th data-field="name">Início</th>
+              <th data-field="price">Duração</th>
+          </tr>
+        </thead>
+        <tbody>
+	        <% @next_contests.each do |contest| %>
+						<tr>
+							<td><%= contest.name %></td>
+							<td><%= contest.start %></td>
+							<td><%= contest.end - contest.start %></td>
+							<td>INSCREVER</td>
+						</tr>
+					<% end %>
+        </tbody>
+      </table>
+				
+		</div>
   </body>
 </html>

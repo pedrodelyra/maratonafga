@@ -1,0 +1,39 @@
+<%= simple_form_for(@contest) do |f| %>
+  <% if @contest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
+
+      <ul>
+      <% @contest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :start %><br>
+    <%= f.datetime_select :start , :default => {:year => Time.now.year + 1, :month => 'Jan', :day => 1}%>
+  </div>
+  <div class="field">
+    <%= f.label :end %><br>
+    <%= f.datetime_select :end, :default => {:year => Time.now.year, :month => 'Jan', :day => 1}%>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <% Question.all.each do |question| %>
+    <p>
+      <%= check_box_tag question.id, question.id, @contest.question_ids.include?(question.id) %>
+      <label for=<%=question.id%> > <%=question.name%></label>
+    </p>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

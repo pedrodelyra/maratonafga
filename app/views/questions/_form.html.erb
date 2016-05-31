@@ -19,11 +19,14 @@
     <%= f.label :author %><br>
     <%= f.text_field :author %>
   </div>
-  <div class="field">
-    <%= f.label :avatar %><br>
-    <%= f.file_field :avatar %>
+  <div>
+    <%= f.label "Question Files" %><br>
+    <%= f.file_field :avatar , :class => "btn file-field input-field"%>
   </div>
   <div class="actions">
-    <%= f.submit %>
+  <p>
+    <%= f.submit  :class => "btn" %>
+    <%= link_to 'Back', questions_path, :class => "btn" %>
+    </p>
   </div>
 <% end %>

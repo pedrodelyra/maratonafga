@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531140059) do
+ActiveRecord::Schema.define(version: 20160531204934) do
+
+  create_table "contests", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "questions", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +28,10 @@ ActiveRecord::Schema.define(version: 20160531140059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "avatar"
+    t.integer  "contest_id"
   end
+
+  add_index "questions", ["contest_id"], name: "index_questions_on_contest_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
