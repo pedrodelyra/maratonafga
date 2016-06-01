@@ -1,0 +1,28 @@
+<div>
+			<h2>Provas Anteriores</h2>
+			<% if @previous_contests.empty? %>
+        <h5>
+        	Nenhuma Prova cadastrada foi encerrada.
+        </h5>
+      <% else %>
+				<table class="striped">
+	        <thead>
+	          <tr>
+	              <th data-field="name">Nome</th>
+	              <th data-field="start">Data</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+		        <% @previous_contests.each do |contest| %>
+							<tr>
+								<td><%= contest.name %></td>
+								<td><%= contest.start %></td>
+								<td>
+									<%= link_to 'Ir para Prova', contest_path(contest.id), method: :get%>
+								</td>
+							</tr>
+						<% end %>
+	        </tbody>
+	      </table>
+      <% end %>
+		</div>

@@ -1,24 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @contest.name %>
-</p>
-
-<p>
-  <strong>Start:</strong>
-  <%= @contest.start %>
-</p>
-
-<p>
-  <strong>End:</strong>
-  <%= @contest.end %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @contest.description %>
-</p>
-
-<%= link_to 'Edit', edit_contest_path(@contest) %> |
-<%= link_to 'Back', contests_path %>
+<h3>Prova: <%= " " + @contest.name %></h3>
+<table class="striped">
+	<thead>
+	  <tr>
+      <th data-field="name">Nome</th>
+      <th data-field="start">Inicio</th>
+      <th data-field="duration">Duração</th>
+      <th data-field="description">Descrição</th>
+	  </tr>
+	</thead>
+	<tbody>
+			<tr>
+				<td><%= @contest.name %></td>
+				<td><%= @contest.start %></td>
+				<td><%= @contest.end - @contest.start %></td>
+				<td><%= @contest.description %></td>
+			</tr>
+	</tbody>
+</table>
+<h3>Questões da Prova:</h3>
+<table class="striped">
+	<thead>
+	  <tr>
+      <th data-field="name">Nome</th>
+      <th data-field="author">Autor</th>
+      <th data-field="files">Arquivos</th>
+	  </tr>
+	</thead>
+	<tbody>
+		<% @contest.questions.each do |question| %>
+			<tr>
+				<td><%= question.name %></td>
+				<td><%= question.author %></td>
+				<td><a target="_blank" href=<%= question.avatar.url %>> <%= question.name %></a></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<% if current_user.try(:admin?) %>
+	<p>
+	<%= link_to 'Edit', edit_contest_path(@contest), :class => "btn" %> 
+	<%= link_to 'Back', contests_path, :class => "btn" %>
+	</p>
+<% end %>

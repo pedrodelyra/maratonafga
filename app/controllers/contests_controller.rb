@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy]
-  before_filter :verify_is_admin, :only => [:new, :index, :show, :edit, :create, :destroy]
+  before_filter :verify_is_admin, :only => [:new, :index, :edit, :create, :destroy]
 
   # GET /contests
   # GET /contests.json

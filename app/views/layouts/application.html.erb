@@ -11,17 +11,19 @@
 
 <nav>
   <div class="nav-wrapper black">
-    <img class="left" src="<%= asset_path('unb-logo.jpg') %>" alt="" style="width: 114px; height: 64px; padding-left: 30px;">
-    <ul id="nav-mobile" class="left hide-on-med-and-down">
-    	<li style="font-size: xx-large; padding-left: 10px;">Maratona UnB</li>  
-    </ul>
+    <a href="/">
+      <img class="left" src="<%= asset_path('unb-logo.jpg') %>" alt="" style="width: 114px; height: 64px; padding-left: 30px;">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+      	<li style="font-size: xx-large; padding-left: 10px;">Maratona UnB</li>  
+      </ul>
+    </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if user_signed_in? %>
         <%= link_to("Olá " + current_user.email + ", Sair", destroy_user_session_path, :method => :delete) %>
       <% else %>
         <%= link_to('Entrar', new_user_session_path)  %>  
       <% end %>
-      <li><a href="sass.html">Sobre</a></li>
+      <li><a href="">Sobre</a></li>
     </ul>
   </div>
 </nav>
@@ -35,17 +37,17 @@
         <a href="/">Página Inicial</a>
       </li>
       <li class="collection-item">
-        <a href="#">Provas Anteriores</a>
+        <%= link_to 'Provas Anteriores', static_pages_previous_contests_path, method: :get%>
       </li>
       <li class="collection-item">
-        <a href="#">ICPC</a>
+        <a target="_blank" href="https://icpc.baylor.edu/">ICPC</a>
       </li>
       <% if current_user.try(:admin?) %>
         <li class="collection-item">
           <%= link_to 'Nova Questão', new_question_path, method: :get%>
         </li>
         <li class="collection-item">
-          <%= link_to 'Novo Contest', new_contest_path, method: :get%>
+          <%= link_to 'Nova Prova', new_contest_path, method: :get%>
         </li>
       <% end %>
     </ul>

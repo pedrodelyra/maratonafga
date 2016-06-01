@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   resources :questions
   post 'static_pages/register_user'
+  get 'static_pages/previous_contests'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

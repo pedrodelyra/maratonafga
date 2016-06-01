@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :start %><br>
-    <%= f.datetime_select :start , :default => {:year => Time.now.year + 1, :month => 'Jan', :day => 1}%>
+    <%= f.datetime_select :start , :default => {:year => Time.now.year, :month => 'Jan', :day => 1}%>
   </div>
   <div class="field">
     <%= f.label :end %><br>
@@ -27,6 +27,9 @@
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
+  <h6>
+    Selecione as Questões da Prova:
+  </h6>
   <% Question.all.each do |question| %>
     <p>
       <%= check_box_tag question.id, question.id, @contest.question_ids.include?(question.id) %>
